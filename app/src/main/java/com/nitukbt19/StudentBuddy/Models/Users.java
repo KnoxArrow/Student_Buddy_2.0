@@ -2,23 +2,25 @@ package com.nitukbt19.StudentBuddy.Models;
 
 public class Users {
     String profilepic,userName,mail,password,userId,lastMessage;
-
-    public Users(String profilepic, String userName, String mail, String password, String userId, String lastMessage) {
+    boolean  isStudent;
+    public Users(String profilepic, String userName, String mail, String password, String userId, String lastMessage,boolean isStudent) {
         this.profilepic = profilepic;
         this.userName = userName;
         this.mail = mail;
         this.password = password;
         this.userId = userId;
         this.lastMessage = lastMessage;
+        this.isStudent=isStudent;
     }
 
     public Users(){}
 
     //SignUp Constructor
-    public Users(String userName, String mail, String password) {
+    public Users(String userName, String mail, String password,boolean isStudent) {
         this.userName = userName;
         this.mail = mail;
         this.password = password;
+        this.isStudent= isStudent;
     }
 
     public String getProfilepic() {
@@ -67,5 +69,13 @@ public class Users {
 
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setStudent(boolean student) {
+        isStudent = student;
     }
 }

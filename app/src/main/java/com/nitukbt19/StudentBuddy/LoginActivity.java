@@ -17,36 +17,39 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.nitukbt19.StudentBuddy.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
+
+    FirebaseDatabase db;
+    DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding=ActivityLoginBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
-
+        db=FirebaseDatabase.getInstance();
+        myRef=db.getReference();
         //disabling Register button till all inputs are entered
         binding.btnLogin.setEnabled(false);
         binding.etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().length()>3){
+                if(charSequence.toString().length()>5){
                     binding.btnLogin.setEnabled(true);
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
             }

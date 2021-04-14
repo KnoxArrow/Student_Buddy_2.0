@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.nitukbt19.StudentBuddy.Models.StudentList;
+import com.nitukbt19.StudentBuddy.Models.TeacherList;
 import com.nitukbt19.StudentBuddy.Models.Users;
 import com.nitukbt19.StudentBuddy.databinding.ActivityRegisterBinding;
 
@@ -28,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(binding.getRoot());
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
@@ -42,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
         //disabling Register button till all inputs are entered
         binding.btnRegister.setEnabled(false);
+        binding.switchStudent.setChecked(true);
         binding.inputConfirmPassword1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -70,9 +73,19 @@ public class RegisterActivity extends AppCompatActivity {
                         addOnCompleteListener(task -> {
                             progressDialog.dismiss();
                             if (task.isSuccessful()) {
-                                Users user=new Users(binding.inputUsername.getText().toString(),binding.etEmailAddress.getText().toString(),binding.inputPasswordRegister2.getText().toString());
+                                Users user=new Users(binding.inputUsername.getText().toString(),binding.etEmailAddress.getText().toString(),binding.inputPasswordRegister2.getText().toString(),binding.switchStudent.isChecked());
                                 String id=task.getResult().getUser().getUid();
                                 database.getReference().child("Users").child(id).setValue(user);
+
+                                //addition to Student or Teacher List
+                                if(binding.switchStudent.isChecked()) {
+                                    StudentList student=new StudentList(id,binding.inputUsername.getText().toString());
+                                    database.getReference().child("StudentList").child(id).setValue(student);
+                                }else{
+                                    TeacherList teacher =new TeacherList(id,binding.inputUsername.getText().toString());
+                                    database.getReference().child("TeacherList").child(id).setValue(teacher);
+                                }
+
                                 Toast.makeText(RegisterActivity.this, "Successfully Registered in Student Buddy", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                 finish();
