@@ -12,7 +12,7 @@
         android:src="@drawable/icon_male_ph"
         app:civ_border_width="2dp"
         app:civ_border_color="#FF000000"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:padding="5dp"
         />
 
@@ -24,14 +24,15 @@
         <TextView
             android:id="@+id/UserName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_weight="1"
             android:gravity="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Neat Roots"
+            android:text="Sample User"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 

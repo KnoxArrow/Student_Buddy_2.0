@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(binding.getRoot());
-       // getSupportActionBar().hide();
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
@@ -80,10 +80,10 @@ public class RegisterActivity extends AppCompatActivity {
                                 //addition to Student or Teacher List
                                 if(binding.switchStudent.isChecked()) {
                                     StudentList student=new StudentList(id,binding.inputUsername.getText().toString());
-                                    database.getReference().child("StudentList").child(id).setValue(student);
+                                    database.getReference().child("StudentList").child(id).setValue(student.getUserName());
                                 }else{
                                     TeacherList teacher =new TeacherList(id,binding.inputUsername.getText().toString());
-                                    database.getReference().child("TeacherList").child(id).setValue(teacher);
+                                    database.getReference().child("TeacherList").child(id).setValue(teacher.getUserName());
                                 }
 
                                 Toast.makeText(RegisterActivity.this, "Successfully Registered in Student Buddy", Toast.LENGTH_SHORT).show();

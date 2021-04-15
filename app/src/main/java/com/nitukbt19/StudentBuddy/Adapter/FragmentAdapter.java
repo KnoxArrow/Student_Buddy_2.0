@@ -19,7 +19,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-            case 0: return new StudentFragment();
             case 1: return new TeacherFragment();
             default:return new StudentFragment();
         }
@@ -34,13 +33,13 @@ public class FragmentAdapter extends FragmentPagerAdapter {
    @Nullable
    @Override
    public CharSequence getPageTitle(int position) {
-        String Tittle =null;
+        String tittle =null;
         if(position==0){
-            Tittle = "Student";
+            tittle = "Student";
         }
         if(position==1){
-            Tittle = "Teacher";
+            tittle = "Teacher";
         }
-        return super.getPageTitle(position);
+        return tittle;
     }
 }
